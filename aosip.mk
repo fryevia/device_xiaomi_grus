@@ -5,14 +5,14 @@
 #
 
 # Inherit some common XenonHD stuff.
-$(call inherit-product, vendor/xenonhd/config/common_full_phone.mk)
+$(call inherit-product, vendor/aosip/config/common_full_phone.mk)
 
 # Inherit from grus device.
 $(call inherit-product, $(LOCAL_PATH)/device.mk)
 
 # Device identifier. This must come after all inclusions.
 PRODUCT_DEVICE := grus
-PRODUCT_NAME := xenonhd_grus
+PRODUCT_NAME := aosip_grus
 PRODUCT_BRAND := Xiaomi
 PRODUCT_MODEL := MI 9 SE
 PRODUCT_MANUFACTURER := Xiaomi
@@ -28,6 +28,12 @@ PRODUCT_BUILD_PROP_OVERRIDES += \
     PRODUCT_NAME="grus" \
     TARGET_DEVICE="grus"
 
-# Device maintainer
-PRODUCT_PROPERTY_OVERRIDES += \
-    ro.xenonhd.maintainer=krasCGQ
+# GApps targets
+TARGET_GAPPS_ARCH := arm64
+IS_PHONE := true
+
+# GApps
+$(call inherit-product-if-exists, vendor/gapps/config.mk)
+
+# PixelStyle
+$(call inherit-product-if-exists, vendor/pixelstyle/config.mk)
